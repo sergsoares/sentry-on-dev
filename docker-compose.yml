@@ -1,0 +1,47 @@
+version: '2'
+
+volumes:
+   pgdb:
+
+services:
+  redis:
+    image: redis
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: sentry
+      POSTGRES_PASSWORD: sentry
+      POSTGRES_DB: sentry
+    volumes:
+     - pgdb:/var/lib/postgresql/data
+
+  sentry:
+    image: sentry
+    links:
+     - redis
+     - postgres
+    ports:
+     - 7000:9000
+#    volumes:
+#      - ./config:/etc/sentry
+    env_file:
+     - sentry.env
+
+  cron:
+    image: sentry
+    links:
+     - redis
+     - postgres
+    command: "sentry run cron"
+    env_file:
+     - sentry.env
+
+  worker:
+    image: sentry
+    links:
+     - redis
+     - postgres
+    command: "sentry run worker"
+    env_file:
+     - sentry.env
