@@ -14,6 +14,12 @@ Após isso inicie com o comando:
 $ make init
 ```
 
-O processo efetuará o Download dos containers docker, efetuará a configuração e vai obter o DSN para uso local, após a conclusão uma mensagem semelhante a essa será mostrada:
+O processo vai executar: 
+- Download dos containers docker
+- Configuração do Banco do Sentry 
+- Obter DSN interna para uso 
+- Enviará um evento de teste 
+
+Após a conclusão uma mensagem semelhante a essa será mostrada:
 
 
