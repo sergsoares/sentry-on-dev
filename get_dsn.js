@@ -17,7 +17,7 @@ async function login(page) {
     await page.type(PASSWORD_INPUT, 'admin')
     await page.click(LOGIN_BUTTON)
     await page.waitForNavigation()
-    await page.waitFor(3000)
+    await page.waitFor(5000)
 }
 
 async function clickContinue(page) {
@@ -26,38 +26,25 @@ async function clickContinue(page) {
 }
 
 (async () => {
-    console.log('Start extract SENTRY_DSN... ')
     const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: true})
     const page = await browser.newPage()
 
-    console.log('Accessing Sentry... ')
+    await page.waitFor(2000)
     await login(page);
 
-    console.log('Logged... ')
     const existsConfigButton = await page.$(CONTINUE_CONFIG_BUTTON)
 
     if(existsConfigButton) {
         await clickContinue(page);
     }
 
-    console.log('Copying DSN... ')
     const text = await getSentryDsnText(page);
 
     // Screenshot for debug purpose.
     // await page.screenshot({ path: screenshot })
     browser.close()
 
+    console.log(text)
     const DSN = 'http' + text
-    console.log('')
-    console.log('* * * * * * * * * * * * * *')
-    console.log('')
-    console.log('This is your Internal Sentry DSN (Development Purpose): ')
-    console.log(DSN)
-    console.log('')
-    console.log('To use in laravel for example, put in your .env')
-    console.log('SENTRY_DSN=' + DSN)
-    console.log('')
-    console.log('To access your events')
-    console.log('http://localhost:7000/sentry/internal/')
 })()
 
