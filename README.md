@@ -8,7 +8,7 @@ Para iniciar tendo o docker instalado, efetue o clone do projeto:
 $ git clone https://github.com/sergsoares/sentry-on-dev.git
 ```
 
-Após isso inicie com o comando:
+Após isso inicie com o comando (Esse processo demora um tempo):
 
 ```
 $ make init
