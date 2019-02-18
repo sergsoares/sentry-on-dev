@@ -11,7 +11,7 @@ docker-compose run --rm sentry sentry upgrade --noinput
 echo "\n Starting Sentry Services"
 make start
 
-sleep 30
+sleep 60
 
 echo "\n Creating admin user to Sentry"
 docker-compose exec sentry sentry createuser --email admin --password admin --superuser --no-input
