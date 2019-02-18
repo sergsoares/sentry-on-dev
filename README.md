@@ -22,4 +22,13 @@ O processo vai executar:
 
 Após a conclusão uma mensagem semelhante a essa será mostrada:
 
+```
+This is your Internal Sentry DSN (Development Purpose): 
+http://96c6eeec37834fcd97a11b7f5cc08d37@sentry:9000/1
 
+To use in laravel for example, put in your .env
+SENTRY_DSN=http://96c6eeec37834fcd97a11b7f5cc08d37@sentry:9000/1
+
+To access your events
+http://localhost:7000/sentry/internal/
+```
