@@ -9,6 +9,8 @@ services:
 
   postgres:
     image: postgres
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_USER: sentry
       POSTGRES_PASSWORD: sentry
@@ -23,8 +25,8 @@ services:
      - postgres
     ports:
      - 7000:9000
-#    volumes:
-#      - ./config:/etc/sentry
+    volumes:
+      - ./config:/etc/sentry
     env_file:
      - sentry.env
 
